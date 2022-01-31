@@ -1,14 +1,29 @@
+// Dependencies
 const express = require('express');
 const path = require('path');
 const { clog } = require('middleware/clog.js');
 
-
-const PORT 
+// Express App
+const PORT = 0000;
 const app = express();
 
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Routes
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'notes.html')));
 
 
+app.get('/api/notes', (req, res) => {
+    // GET /api/notes should read the db.json file and return all saved notes as JSON.
+    readFromFile('db/db.json').then((data) => res.json(JSON.parse(data)));
+});
 
+app.post('/api/notes', (req, res) => {
+    // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
+    
+});
 
 
 
@@ -20,10 +35,12 @@ const app = express();
 
 
 // The following HTML routes should be created:
-    // GET /notes should return the notes.html file.
+    // GET /notes should return the notes.html file. DONE
     // GET * should return the index.html file.
 
 
 // The following API routes should be created:
     // GET /api/notes should read the db.json file and return all saved notes as JSON.
     // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
+
+// data persistence
