@@ -1,5 +1,6 @@
 // Dependencies
 const express = require('express');
+const shortUniqueId = require('short-unique-id');
 const path = require('path');
 const { clog } = require('middleware/clog.js');
 
@@ -11,15 +12,15 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routes
+// Routes (get)
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'notes.html')));
-
 
 app.get('/api/notes', (req, res) => {
     // GET /api/notes should read the db.json file and return all saved notes as JSON.
     readFromFile('db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
+// Routes (post)
 app.post('/api/notes', (req, res) => {
     // POST /api/notes should receive a new note to save on the request body, add it to the db.json file
 
