@@ -1,16 +1,18 @@
 // Dependencies
 const express = require('express');
-const shortUniqueId = require('short-unique-id');
+const fs = require('fs');
 const path = require('path');
-const { clog } = require('middleware/clog.js');
+const shortUniqueId = require('short-unique-id');
+
 
 // Express App
-const PORT = 0000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Routes (get)
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'notes.html')));
@@ -24,14 +26,16 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     // POST /api/notes should receive a new note to save on the request body, add it to the db.json file
 
+    // destructuring assignment for the items in req.body
     const { title, text } = req.body;
 
     if (req.body) {
         const newNote = {
             title,
-            text
+            text,
+            // must give the new note a unique ID (short unique id npm package) Saved under id
+            note_id: shortUniqueId(),
         }
-// must give the new note a unique ID (npm package)
 // must return new note to the client
         readAndAppend(newNote, 'db/db.json');
         res.json('Note added successfully!');
@@ -41,21 +45,16 @@ app.post('/api/notes', (req, res) => {
 });
 
 
+// DELETE /api/notes/:id should receive a query parameter that contains the id of a note to delete. To delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
+// app.delete(/api/notes/:id, (req, res) => {
 
-// GET ('*'); at the bottom of the page
+// });
+
+
+// GET ('*'); at the bottom of the page - should return the index.html file
 // just captures anything that is not defined as a valid route
 // like localhost:3000/blablabla
 
-
-
-
-// The following HTML routes should be created:
-    // GET /notes should return the notes.html file. DONE
-    // GET * should return the index.html file.
-
-
-// The following API routes should be created:
-    // GET /api/notes should read the db.json file and return all saved notes as JSON.
-    // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
-
 // data persistence
+
+app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
