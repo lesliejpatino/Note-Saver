@@ -3,7 +3,7 @@
 
 ## Table of Contents
 * [Description](#description)
-* [Live Site](#link)
+* [Live Site](#live-site)
 * [Installation](#installation)
 * [Author](#author)
 * [License](#license)
