@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Routes (get)
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 
 // GET /api/notes read the db.json file and return all saved notes as JSON.
 app.get('/api/notes', (req, res) => {
@@ -72,8 +73,6 @@ app.delete('/api/notes/:id', (req, res) => {
     })
 });
 
-
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
 
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
