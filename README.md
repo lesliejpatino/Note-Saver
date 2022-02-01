@@ -19,5 +19,18 @@ Additionally, the note will stay on the page even after a page refresh. If the u
 
 
 ## Installation
+The following dependencies will be needed in order for this application to work:
+* [Express.js](https://expressjs.com/)
+* [Node.js](https://nodejs.org/en/)
+* [Node module - FS(file system) ](https://nodejs.org/api/fs.html)
+* [Short Unique ID](https://www.npmjs.com/package/short-unique-id)
+
+
+
 ## Author
+Leslie Patino
+* [Leslie's GitHub](https://github.com/lesliejpatino)
+* [Leslie's LinkedIn](https://www.linkedin.com/in/lesliejpatino/)
+
+
 ## License
