@@ -64,6 +64,7 @@ app.post('/api/notes', (req, res) => {
 // GET ('*'); at the bottom of the page - should return the index.html file
 // just captures anything that is not defined as a valid route
 // like localhost:3000/blablabla
-
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
 
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
