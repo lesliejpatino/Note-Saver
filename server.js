@@ -6,12 +6,10 @@ const { default: ShortUniqueId } = require('short-unique-id');
 const shortUniqueId = require('short-unique-id');
 const { readAndAppend, writeToFile, readFromFile } = require('./helper/fsUtils.js');
 
-
 // Express App
 const PORT = process.env.PORT || 3001;
 const app = express();
 const uid = new ShortUniqueId({ length: 3 });
-
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));

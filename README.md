@@ -10,7 +10,7 @@
 
 
 ## Description
-This application allows the user to create a note of any kind and save it directly to the app. Once the user is on the notes page, they are presented with a space for their to input the title of their note and any related details. The user is required to enter a title and to input some sort of text into the body before saving their note. Once there is text in the body of the note, a save icon will appear in the upper right hand corner.
+This application allows the user to create and save a note directly to the app. When the user first enters the page, they will click on the Get Started button to enter the notes page. They are then presented with a section to input the title of their note and any related content. The user must enter a title and input text into the body before they can save their note. Once text is written in the body of the note, a save icon will appear in the upper right hand corner of the page.
 Additionally, the note will stay on the page even after a page refresh. If the user chooses, they can easily delete a note by clicking on the trash bin next to the note. 
 
 
