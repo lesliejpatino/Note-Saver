@@ -20,11 +20,8 @@ app.use(express.static('public'));
 
 // Routes (get)
 
-
+// GET /api/notes read the db.json file and return all saved notes as JSON.
 app.get('/api/notes', (req, res) => {
-
-    console.log("test")
-    // GET /api/notes should read the db.json file and return all saved notes as JSON.
     readFromFile('./db/db.json').then((data) => {
         console.log(JSON.parse(data));
         res.json(JSON.parse(data))
@@ -33,9 +30,8 @@ app.get('/api/notes', (req, res) => {
 });
 
 // Routes (post)
+// POST /api/notes should receive a new note to save on the request body, add it to the db.json file
 app.post('/api/notes', (req, res) => {
-    // POST /api/notes should receive a new note to save on the request body, add it to the db.json file
-
     // destructuring assignment for the items in req.body
     const { title, text } = req.body;
 
@@ -43,10 +39,8 @@ app.post('/api/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            // must give the new note a unique ID (short unique id npm package) Saved under id
-            note_id: uid(),
+            id: uid(),
         }
-// must return new note to the client
         readAndAppend(newNote, './db/db.json');
         res.json('Note added successfully!');
     } else {
@@ -56,14 +50,10 @@ app.post('/api/notes', (req, res) => {
 
 
 // DELETE /api/notes/:id should receive a query parameter that contains the id of a note to delete. To delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
-// app.delete(/api/notes/:note_id, (req, res) => {
-
+// app.delete('/api/notes/:id' (req, res) => {
 // });
 
 
-// GET ('*'); at the bottom of the page - should return the index.html file
-// just captures anything that is not defined as a valid route
-// like localhost:3000/blablabla
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
 
